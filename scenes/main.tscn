@@ -1,3 +1,86 @@
-[gd_scene format=3 uid="uid://jbsbf1lu0dsn"]
+[gd_scene load_steps=7 format=3 uid="uid://jbsbf1lu0dsn"]
+
+[ext_resource type="Texture2D" uid="uid://bvocscixwitrv" path="res://assets/tile-maps/BG.png" id="1_3n5pf"]
+[ext_resource type="PackedScene" uid="uid://dq7w0vyb18mpm" path="res://players/kiro.tscn" id="1_i48v5"]
+[ext_resource type="Texture2D" uid="uid://mpanqjg5sj7t" path="res://assets/tile-maps/SpaceLayer.png" id="2_omegk"]
+[ext_resource type="Texture2D" uid="uid://0jkhwk2kga8j" path="res://assets/tile-maps/Title.png" id="4_nfcqx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ifbhw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_31gmn"]
+size = Vector2(11, 579)
 
 [node name="Main" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [567.0]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(324, 576)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(160, 285)
+texture = ExtResource("1_3n5pf")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(648, 1152)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture = ExtResource("2_omegk")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(164, 217)
+texture = ExtResource("4_nfcqx")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(0, -1)
+polygon = PackedVector2Array(-201, 479, -50, 465, 104, 453, 270, 453, 380, 463, 529, 472, 528, 569, -200, 573)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LeftBtn" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2(81, 283)
+scale = Vector2(8, 29)
+shape = SubResource("RectangleShape2D_ifbhw")
+passby_press = true
+action = "ui_left"
+
+[node name="RightBtn" type="TouchScreenButton" parent="CanvasLayer"]
+position = Vector2(243, 283)
+scale = Vector2(8, 29)
+shape = SubResource("RectangleShape2D_ifbhw")
+passby_press = true
+action = "ui_right"
+
+[node name="Borders" type="RigidBody2D" parent="CanvasLayer"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CanvasLayer/Borders"]
+position = Vector2(531, 280)
+scale = Vector2(1, 999)
+shape = SubResource("RectangleShape2D_31gmn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Borders"]
+position = Vector2(-206, 283)
+scale = Vector2(1, 999)
+shape = SubResource("RectangleShape2D_31gmn")
+
+[node name="Kiro" parent="." instance=ExtResource("1_i48v5")]
+unique_name_in_owner = true
+position = Vector2(160, 426)
+
+[node name="Camera2D" type="Camera2D" parent="Kiro"]
+position = Vector2(-160, -426)
+anchor_mode = 0
+limit_left = -200
+limit_right = 524
+limit_bottom = 567
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true

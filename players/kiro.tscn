@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://dq7w0vyb18mpm"]
+[gd_scene load_steps=13 format=3 uid="uid://dq7w0vyb18mpm"]
 
+[ext_resource type="Script" path="res://players/kiro.gd" id="1_2iru8"]
 [ext_resource type="Texture2D" uid="uid://cnkteluioxf72" path="res://assets/kiro/kiro.png" id="1_x14co"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y1535"]
@@ -71,6 +72,7 @@ radius = 11.0
 height = 26.0
 
 [node name="Kiro" type="CharacterBody2D"]
+script = ExtResource("1_2iru8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sillt")
