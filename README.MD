@@ -32,13 +32,13 @@ Will you help **KIRO** to escape ***LATA*** Planet.
 
 ## MANUS AI Breif
 Based on your description, here's a summary of the core concept:
-Game Name: Kiro Jump
-Genre: Pixel Art Endless Runner with Roguelite elements.
-Story: Kiro, a simple alien, is trapped on Planet Lata and must ascend by jumping to escape.
-Gameplay: Players control Kiro, jumping upwards to achieve the highest score possible while avoiding obstacles.
-Enemies:
-Gravitt: Creates gravity pulls to drag Kiro down.
-Obsy: Places physical obstacles in Kiro's path.
+**Game Name**: Kiro Jump
+**Genre**: Pixel Art Endless Runner with Roguelite elements.
+**Story**: Kiro, a simple alien, is trapped on Planet Lata and must ascend by jumping to escape.
+**Gameplay**: Players control Kiro, jumping upwards to achieve the highest score possible while avoiding obstacles.
+**Enemies**:
+- ***Gravitt***: Creates gravity pulls to drag Kiro down.
+- ***Obsy***: Places physical obstacles in Kiro's path.
 Engine: Godot (for multi-platform support).
 This is a solid foundation. To build the "best version" of this game, we need to flesh out the details, especially the roguelite elements and the core gameplay loop.
 Here are the next things we should decide on:
