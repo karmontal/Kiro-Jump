@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KIRO JUMP - Gameplay</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Inter:wght@400;700&amp;family=JetBrains+Mono:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#cf5cff",
+                    "gravitt-red": "#FF003D",
+                    "surface-dim": "#141313",
+                    "tertiary-container": "#e2e2e2",
+                    "on-primary-container": "#636565",
+                    "error-container": "#93000a",
+                    "kiro-white": "#FFFFFF",
+                    "surface-container-lowest": "#0e0e0e",
+                    "secondary": "#ecb2ff",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "tertiary": "#ffffff",
+                    "outline-variant": "#444748",
+                    "on-primary-fixed": "#1a1c1c",
+                    "ui-panel": "rgba(18, 0, 36, 0.85)",
+                    "lata-purple": "#7000FF",
+                    "surface-container-high": "#2a2a2a",
+                    "secondary-fixed-dim": "#ecb2ff",
+                    "on-surface": "#e5e2e1",
+                    "surface-container-highest": "#353434",
+                    "surface-container-low": "#1c1b1b",
+                    "on-surface-variant": "#c4c7c8",
+                    "space-mid": "#2D0052",
+                    "primary": "#ffffff",
+                    "on-secondary": "#520071",
+                    "on-secondary-fixed": "#320047",
+                    "on-error-container": "#ffdad6",
+                    "primary-fixed": "#e2e2e2",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "secondary-fixed": "#f8d8ff",
+                    "inverse-primary": "#5d5f5f",
+                    "on-secondary-container": "#480063",
+                    "primary-container": "#e2e2e2",
+                    "surface-bright": "#3a3939",
+                    "obsy-orange": "#FF6B00",
+                    "background": "#141313",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "error": "#ffb4ab",
+                    "surface-variant": "#353434",
+                    "on-secondary-fixed-variant": "#74009f",
+                    "on-primary": "#2f3131",
+                    "surface-tint": "#c6c6c7",
+                    "on-primary-fixed-variant": "#454747",
+                    "inverse-surface": "#e5e2e1",
+                    "on-background": "#e5e2e1",
+                    "primary-fixed-dim": "#c6c6c7",
+                    "outline": "#8e9192",
+                    "space-deep": "#120024",
+                    "on-tertiary": "#2f3131",
+                    "surface": "#141313",
+                    "on-error": "#690005",
+                    "surface-container": "#201f1f",
+                    "inverse-on-surface": "#313030",
+                    "on-tertiary-container": "#636565",
+                    "tertiary-fixed": "#e2e2e2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "stack-md": "16px",
+                    "stack-sm": "8px",
+                    "pixel-unit": "4px",
+                    "stack-lg": "32px",
+                    "margin-desktop": "40px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Space Mono"],
+                    "button-text": ["Space Mono"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-xl": ["Space Mono"],
+                    "headline-lg-mobile": ["Space Mono"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "32px", "letterSpacing": "-1px", "fontWeight": "700"}],
+                    "button-text": ["18px", {"lineHeight": "18px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-xl": ["48px", {"lineHeight": "48px", "letterSpacing": "-2px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "24px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        body {
+            background-color: #120024;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        .pixel-bg {
+            background-image: 
+                radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 160px 120px, #fff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+        }
+
+        .gravity-field {
+            height: 100px;
+            background: linear-gradient(transparent, #7000FF55, #7000FF);
+            mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0 50 Q 25 0 50 50 T 100 50 V 100 H 0 Z" fill="black"/></svg>');
+            mask-repeat: repeat-x;
+            mask-size: 50% 100%;
+            animation: wave 4s infinite linear;
+        }
+
+        @keyframes wave {
+            from { mask-position: 0 0; }
+            to { mask-position: 200% 0; }
+        }
+
+        /* Float effects */
+        @keyframes platformFloat {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0); }
+        }
+
+        .platform-floating {
+            animation: platformFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes powerupHover {
+            0% { transform: translate(-50%, -10px); }
+            50% { transform: translate(-50%, -20px); }
+            100% { transform: translate(-50%, -10px); }
+        }
+
+        .powerup-hover {
+            animation: powerupHover 2s ease-in-out infinite;
+        }
+
+        /* Pulsing Glows */
+        @keyframes shieldPulse {
+            0% { box-shadow: 0 0 15px 5px rgba(112, 0, 255, 0.4); }
+            50% { box-shadow: 0 0 30px 15px rgba(0, 163, 255, 0.7); }
+            100% { box-shadow: 0 0 15px 5px rgba(112, 0, 255, 0.4); }
+        }
+
+        .shield-glow {
+            border-radius: 50%;
+            animation: shieldPulse 2.5s ease-in-out infinite;
+        }
+
+        @keyframes indicatorPulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .pulse-active {
+            animation: indicatorPulse 1s ease-in-out infinite;
+        }
+
+        /* Screen Shake */
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+
+        .screen-shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        /* Particles */
+        .particle {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 25;
+            animation: particleOut 1s forwards;
+        }
+
+        @keyframes particleOut {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tw-translate-x), var(--tw-translate-y)) scale(0); opacity: 0; }
+        }
+
+        .platform {
+            box-shadow: 0 0 10px #7000FF;
+        }
+
+        .spike {
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .pushed-state:active {
+            transform: translateY(2px);
+        }
+
+        .kiro-jump-animation {
+            animation: bounce 0.6s infinite alternate cubic-bezier(0.45, 0, 0.55, 1);
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-40px); }
+        }
+
+        .glow-text {
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .kiro-jump-animation, .platform-floating, .powerup-hover, .shield-glow, .pulse-active, .screen-shake, .wave, .gravity-field, .particle {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen font-body-md text-kiro-white">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile pt-4 bg-transparent">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-kiro-white">menu</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">KIRO JUMP</span>
+</div>
+<span class="material-symbols-outlined text-kiro-white">leaderboard</span>
+</header>
+<!-- Gameplay Canvas -->
+<main class="relative flex-1 overflow-hidden pixel-bg" id="game-canvas">
+<!-- HUD Overlay -->
+<div class="absolute top-16 left-margin-mobile z-40">
+<div class="bg-ui-panel border border-lata-purple px-3 py-1 flex items-center gap-2 shadow-[4px_4px_0_0_#000000]">
+<span class="material-symbols-outlined text-label-sm text-kiro-white">height</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile glow-text">125m</span>
+</div>
+</div>
+<div class="absolute top-28 left-margin-mobile z-40 flex flex-col gap-2">
+<!-- Power-up Status Entry -->
+<div class="flex items-center gap-2 bg-ui-panel border border-kiro-white/20 p-1 pr-3 rounded-full shadow-[2px_2px_0_0_#000000] pulse-active screen-shake" id="shield-indicator">
+<div class="relative w-8 h-8">
+<img alt="Active Shield" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDT5epnK25XmXfDpF9he-3xuKF5v9gMSrOO1gnE52MrSc5pMAtrvGYNTfzmz4-oUIk2wZJ00C98B0cMerI2n6Z3HLPvumLsk-83baDNAWT6pd0qCk-GkHDhe0wueR75Q3rIebKgqbwijQ-Jyes4e4-ajxEJs_1Dzg89R00yaKNFvyFNXUY76KEI4aVG-t10lj8U95Rt7wFytXqOSMm_3BXZL-eX4zPD43dGh9SlB9WULDNNbnjuRMG7uwBAO68hUDcSvjjfHig_usk"/>
+<svg class="absolute inset-0 -rotate-90 w-8 h-8">
+<circle cx="16" cy="16" fill="transparent" r="14" stroke="#7000FF" stroke-dasharray="88" stroke-dashoffset="22" stroke-width="2"></circle>
+</svg>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-tighter">Shield Active</span>
+</div>
+</div>
+<div class="absolute top-16 right-margin-mobile z-40">
+<div class="bg-ui-panel border border-lata-purple px-3 py-1 flex items-center gap-2 shadow-[4px_4px_0_0_#000000]">
+<span class="material-symbols-outlined text-label-sm text-obsy-orange" style="font-variation-settings: 'FILL' 1;">monetization_on</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile glow-text">5400</span>
+</div>
+</div>
+<!-- Level Content -->
+<div class="absolute inset-0 flex flex-col items-center justify-end pb-32">
+<!-- High Obstacle -->
+<div class="absolute top-1/4 left-1/4">
+<div class="spike bg-gravitt-red w-8 h-8 shadow-[0_0_12px_rgba(255,0,61,0.4)]"></div>
+</div>
+<!-- Floating Platform 1 -->
+<div class="absolute top-1/3 right-1/4 platform-floating">
+<div class="platform bg-space-deep border-2 border-lata-purple w-24 h-6 rounded-sm shadow-[0_4px_0_0_#000000]">
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 powerup-hover">
+<img alt="Shield Power-up" class="w-10 h-10 drop-shadow-[0_0_8px_#320047]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDT5epnK25XmXfDpF9he-3xuKF5v9gMSrOO1gnE52MrSc5pMAtrvGYNTfzmz4-oUIk2wZJ00C98B0cMerI2n6Z3HLPvumLsk-83baDNAWT6pd0qCk-GkHDhe0wueR75Q3rIebKgqbwijQ-Jyes4e4-ajxEJs_1Dzg89R00yaKNFvyFNXUY76KEI4aVG-t10lj8U95Rt7wFytXqOSMm_3BXZL-eX4zPD43dGh9SlB9WULDNNbnjuRMG7uwBAO68hUDcSvjjfHig_usk"/>
+</div>
+</div>
+</div>
+<!-- Floating Platform 2 -->
+<div class="absolute bottom-[40%] left-1/3 platform-floating" style="animation-delay: -1.5s;">
+<div class="platform bg-space-deep border-2 border-lata-purple w-32 h-6 rounded-sm shadow-[0_4px_0_0_#000000]">
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 powerup-hover" style="animation-delay: 0.5s;">
+<img alt="Magnet Power-up" class="w-10 h-10 drop-shadow-[0_0_8px_#FF6B00]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJNF_y6m6aDfbrWz8-FDmj80sW4uqHEDTnj-iOtHkCEKWyCRdiZzAZB3idyiCKzcqtlYOn6DfG1fZWV0uROmUZH_hcFNpNc7_rwvfz4fuTE3rjyEKM1L7TnjeUO2_kOyk8FweyMATLRuJq8qWipCuZzxc5GHlwbVjFF_yQDsoOd3QTFmELy3NFnNnKs7_q50-9gSqTOT1UMBZQD_6QKrlS9aYHA_AA9uK8-ZR-WvLJFxWr4jdb8otwWtEEes8pm1l7uqNKijnsq-o"/>
+</div>
+</div>
+</div>
+<!-- Main Character: KIRO -->
+<div class="relative z-30 kiro-jump-animation" id="kiro-container">
+<div class="absolute inset-0 shield-glow scale-125 z-0" id="kiro-aura"></div>
+<img alt="Kiro character" class="w-24 h-24 object-contain relative z-10" src="https://lh3.googleusercontent.com/aida/ADBb0ugIlH_MQdXC8wI3D1SXqpS-boEQa2Y83B_lvC2-IJJO50K1MwAqVBLyRA2fbIfGO8RWimjRz6K0MiRt3ywugylxB4vTIesv60_N5C0T0i1NQfZIWfRu0Vb9uzKj8iIGRfaGKJMpQAm2oGiVaeHZNHtd_5gq16FkV4L4lFnMxTrFzANECIbEae6yrq4RMPrwrPS-qJirh8pfJdQsvyulamjpbkOoVy4QT8sfumtGFbz-VVgV0JRFLvkBplg"/>
+</div>
+<!-- Ground Platform -->
+<div class="w-4/5 h-8 bg-space-mid border-4 border-lata-purple relative mt-12 shadow-[0_6px_0_0_#000000]">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 flex gap-1">
+<div class="spike bg-gravitt-red w-4 h-4"></div>
+<div class="w-8"></div>
+<div class="spike bg-gravitt-red w-4 h-4"></div>
+</div>
+</div>
+</div>
+<!-- Planet Lata Surface Background -->
+<div class="absolute bottom-0 left-0 w-full h-48 pointer-events-none">
+<div class="absolute bottom-16 w-full flex items-end justify-around opacity-30">
+<div class="w-32 h-24 bg-space-mid" style="clip-path: polygon(50% 0, 0 100%, 100% 100%)"></div>
+<div class="w-48 h-32 bg-space-mid" style="clip-path: polygon(50% 0, 0 100%, 100% 100%)"></div>
+<div class="w-24 h-20 bg-space-mid" style="clip-path: polygon(50% 0, 0 100%, 100% 100%)"></div>
+</div>
+<div class="absolute bottom-0 w-full gravity-field"></div>
+<div class="absolute bottom-0 w-full h-8 bg-space-deep border-t-2 border-lata-purple"></div>
+</div>
+<!-- Special Ability Button -->
+<div class="absolute bottom-24 left-1/2 -translate-x-1/2 z-50">
+<button class="w-20 h-20 bg-ui-panel border-4 border-kiro-white rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.4)] pushed-state active:scale-95 transition-all">
+<span class="material-symbols-outlined text-4xl text-kiro-white">north</span>
+</button>
+<div class="mt-2 text-center">
+<span class="font-label-sm text-label-sm text-kiro-white uppercase tracking-widest opacity-80">Mega Jump</span>
+</div>
+</div>
+</main>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-ui-panel border-t-2 border-lata-purple shadow-[0_-4px_0_0_#000000] rounded-t-xl">
+<div class="flex flex-col items-center justify-center bg-lata-purple text-kiro-white rounded-lg p-2 translate-y-0.5 scale-95 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="play_arrow">play_arrow</span>
+</div>
+<div class="flex flex-col items-center justify-center text-lata-purple p-2 hover:bg-space-mid transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="pause">pause</span>
+</div>
+<div class="flex flex-col items-center justify-center text-lata-purple p-2 hover:bg-space-mid transition-all cursor-pointer">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+</div>
+</nav>
+<!-- Interaction Script -->
+<script>
+    const kiroContainer = document.getElementById('kiro-container');
+    const mainCanvas = document.getElementById('game-canvas');
+    const shieldIndicator = document.getElementById('shield-indicator');
+
+    // Particle generator
+    function createPowerUpParticles() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        const rect = kiroContainer.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        for (let i = 0; i < 3; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Randomize size and sparkle type
+            const size = Math.random() * 4 + 4;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            
+            // Random direction
+            const angle = Math.random() * Math.PI * 2;
+            const dist = 50 + Math.random() * 100;
+            const tx = Math.cos(angle) * dist;
+            const ty = Math.sin(angle) * dist;
+            
+            particle.style.setProperty('--tw-translate-x', `${tx}px`);
+            particle.style.setProperty('--tw-translate-y', `${ty}px`);
+            
+            // Shield theme colors (blue/white/purple)
+            const colors = ['#fff', '#00A3FF', '#7000FF'];
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            
+            particle.style.left = centerX + 'px';
+            particle.style.top = centerY + 'px';
+            
+            document.body.appendChild(particle);
+            
+            setTimeout(() => particle.remove(), 1000);
+        }
+    }
+
+    // Continuous particles while active
+    setInterval(createPowerUpParticles, 200);
+
+    // Jump micro-interaction
+    const jumpBtn = document.querySelector('button');
+    jumpBtn.addEventListener('mousedown', () => {
+        kiroContainer.style.animation = 'none';
+        
+        // Trigger screen shake on large action
+        shieldIndicator.classList.remove('screen-shake');
+        void shieldIndicator.offsetWidth; // Force reflow
+        shieldIndicator.classList.add('screen-shake');
+
+        setTimeout(() => {
+            kiroContainer.style.transition = 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
+            kiroContainer.style.transform = 'translateY(-300px) scale(1.1)';
+            
+            setTimeout(() => {
+                kiroContainer.style.transform = 'translateY(0) scale(1)';
+                setTimeout(() => {
+                    kiroContainer.style.animation = 'bounce 0.6s infinite alternate cubic-bezier(0.45, 0, 0.55, 1)';
+                    kiroContainer.style.transition = 'none';
+                }, 400);
+            }, 800);
+        }, 10);
+    });
+
+    // Environment particles (Ambient)
+    setInterval(() => {
+        const particle = document.createElement('div');
+        const size = Math.random() * 4 + 2;
+        particle.style.position = 'absolute';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.bottom = '-10px';
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.background = '#7000FF';
+        particle.style.opacity = '0.4';
+        particle.style.zIndex = '10';
+        particle.style.transition = 'all 3s linear';
+        mainCanvas.appendChild(particle);
+
+        setTimeout(() => {
+            particle.style.transform = `translateY(-${Math.random() * 400 + 200}px) scale(0)`;
+            particle.style.opacity = '0';
+        }, 50);
+
+        setTimeout(() => particle.remove(), 3050);
+    }, 400);
+</script>
+</body></html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>KIRO JUMP - Main Menu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .pixel-border-chunky {
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+        }
+        
+        .pixel-border-chunky:active {
+            box-shadow: 0px 0px 0px 0px rgba(0,0,0,1);
+            transform: translateY(4px);
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 15px rgba(112, 0, 255, 0.4);
+        }
+
+        .crt-overlay {
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .star-field {
+            background-image: 
+                radial-gradient(1px 1px at 25px 35px, white, rgba(255,255,255,0)),
+                radial-gradient(1px 1px at 50px 100px, #7000FF, rgba(255,255,255,0)),
+                radial-gradient(2px 2px at 125px 150px, white, rgba(255,255,255,0)),
+                radial-gradient(1.5px 1.5px at 200px 50px, #FF003D, rgba(255,255,255,0));
+            background-size: 250px 250px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-high": "#2a2a2a",
+                      "gravitt-red": "#FF003D",
+                      "surface": "#141313",
+                      "surface-bright": "#3a3939",
+                      "surface-container-low": "#1c1b1b",
+                      "inverse-on-surface": "#313030",
+                      "inverse-surface": "#e5e2e1",
+                      "on-secondary": "#520071",
+                      "on-tertiary": "#2f3131",
+                      "space-mid": "#2D0052",
+                      "secondary-fixed": "#f8d8ff",
+                      "on-secondary-container": "#480063",
+                      "primary-fixed": "#e2e2e2",
+                      "error": "#ffb4ab",
+                      "on-secondary-fixed-variant": "#74009f",
+                      "on-primary-fixed-variant": "#454747",
+                      "space-deep": "#120024",
+                      "secondary-fixed-dim": "#ecb2ff",
+                      "outline-variant": "#444748",
+                      "secondary-container": "#cf5cff",
+                      "surface-container-highest": "#353434",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "obsy-orange": "#FF6B00",
+                      "on-surface": "#e5e2e1",
+                      "surface-dim": "#141313",
+                      "on-error-container": "#ffdad6",
+                      "outline": "#8e9192",
+                      "primary-container": "#e2e2e2",
+                      "background": "#141313",
+                      "on-tertiary-container": "#636565",
+                      "on-primary": "#2f3131",
+                      "on-primary-fixed": "#1a1c1c",
+                      "kiro-white": "#FFFFFF",
+                      "on-error": "#690005",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "primary": "#ffffff",
+                      "surface-container-lowest": "#0e0e0e",
+                      "primary-fixed-dim": "#c6c6c7",
+                      "error-container": "#93000a",
+                      "surface-tint": "#c6c6c7",
+                      "tertiary": "#ffffff",
+                      "on-primary-container": "#636565",
+                      "surface-container": "#201f1f",
+                      "on-secondary-fixed": "#320047",
+                      "on-background": "#e5e2e1",
+                      "ui-panel": "rgba(18, 0, 36, 0.85)",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "lata-purple": "#7000FF",
+                      "tertiary-container": "#e2e2e2",
+                      "surface-variant": "#353434",
+                      "secondary": "#ecb2ff",
+                      "on-surface-variant": "#c4c7c8",
+                      "tertiary-fixed": "#e2e2e2",
+                      "inverse-primary": "#5d5f5f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "stack-md": "16px",
+                      "pixel-unit": "4px",
+                      "margin-mobile": "20px",
+                      "gutter": "16px",
+                      "margin-desktop": "40px",
+                      "stack-lg": "32px"
+              },
+              "fontFamily": {
+                      "label-sm": ["JetBrains Mono"],
+                      "button-text": ["Space Mono"],
+                      "headline-xl": ["Space Mono"],
+                      "body-md": ["Inter"],
+                      "headline-lg-mobile": ["Space Mono"],
+                      "headline-lg": ["Space Mono"]
+              },
+              "fontSize": {
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "button-text": ["18px", {"lineHeight": "18px", "fontWeight": "700"}],
+                      "headline-xl": ["48px", {"lineHeight": "48px", "letterSpacing": "-2px", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "24px", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "32px", "letterSpacing": "-1px", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-hidden selection:bg-lata-purple selection:text-kiro-white">
+<!-- Planet Lata Background -->
+<div class="fixed inset-0 z-0 bg-space-deep overflow-hidden">
+<div class="absolute inset-0 star-field opacity-40"></div>
+<!-- Stylized Planet -->
+<div class="absolute bottom-[-10%] right-[-10%] w-[120vw] h-[120vw] rounded-full bg-space-mid border-[12px] border-lata-purple opacity-30 blur-sm" data-alt="A massive stylized pixel-art planet known as Planet Lata, characterized by deep space purples and glowing violet craters. The planet dominates the bottom right corner of the composition, set against a dark starry void. The aesthetic is heavily inspired by 8-bit retro gaming, featuring chunky textures and a neon color palette that feels both nostalgic and futuristic."></div>
+<div class="absolute inset-0 crt-overlay z-10"></div>
+</div>
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 right-0 z-40 bg-surface text-kiro-white border-b-4 border-lata-purple shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex justify-between items-center w-full px-margin-mobile py-stack-sm">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-kiro-white">menu</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white uppercase tracking-tighter">KIRO JUMP</h1>
+</div>
+<div class="flex items-center gap-2 bg-space-mid px-3 py-1 border-2 border-lata-purple">
+<span class="material-symbols-outlined text-kiro-white text-[18px]">monetization_on</span>
+<span class="font-label-sm text-label-sm">9999</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="relative z-20 flex flex-col items-center justify-center min-h-screen px-margin-mobile pt-24 pb-32">
+<!-- Hero Section: Logo and Character -->
+<div class="flex flex-col items-center mb-stack-lg relative">
+<div class="relative w-64 h-64 md:w-80 md:h-80 animate-float">
+<img alt="Kiro Character Logo" class="w-full h-full object-contain filter drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgrwsupzdEfbHJddoN_N96ZexgXQ-P-Wa8xmAf9LQ4DP2tZhBmaC_IFVBsSHGYcyCJgQsl6MJQyRwYYFfvAp4CEdCuc8ag7w_akemO5XxLMawVS_OhlCkGR3mDn-jN7nCbSBR8H-NZa6IrTdJdigOOxmWVvPb6As_9MmMlkQM0PxlKlx4Er1Mu5seBHnycqnE_qkcIR8Z_24zbfXi6P4IiwxEAV7MnR72dWEKk66EnSuIWN4xRttIb5RmndndXVXx5vETHissWafs"/>
+</div>
+<!-- High Score Badge -->
+<div class="mt-[-20px] z-30 bg-gravitt-red text-kiro-white px-4 py-2 border-2 border-black pixel-border-chunky transform -rotate-2">
+<span class="font-label-sm text-label-sm uppercase">HIGH SCORE: 42,069</span>
+</div>
+</div>
+<!-- Central Navigation Buttons -->
+<div class="w-full max-w-sm flex flex-col gap-4">
+<!-- Start Game -->
+<button class="w-full py-6 bg-kiro-white text-space-deep border-4 border-black pixel-border-chunky transition-all group overflow-hidden relative" onclick="startGame()">
+<span class="relative z-10 font-headline-lg-mobile text-headline-lg-mobile uppercase tracking-widest group-active:scale-95 block">START GAME</span>
+<div class="absolute inset-0 bg-lata-purple translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300 opacity-10"></div>
+</button>
+<!-- Secondary Actions Grid -->
+<div class="grid grid-cols-3 gap-3">
+<button class="flex flex-col items-center justify-center py-4 bg-ui-panel border-2 border-lata-purple pixel-border-chunky text-kiro-white hover:bg-space-mid transition-colors group">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform">shopping_cart</span>
+<span class="font-label-sm text-label-sm uppercase">SHOP</span>
+</button>
+<button class="flex flex-col items-center justify-center py-4 bg-ui-panel border-2 border-lata-purple pixel-border-chunky text-kiro-white hover:bg-space-mid transition-colors group">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform">leaderboard</span>
+<span class="font-label-sm text-label-sm uppercase">RANK</span>
+</button>
+<button class="flex flex-col items-center justify-center py-4 bg-ui-panel border-2 border-lata-purple pixel-border-chunky text-kiro-white hover:bg-space-mid transition-colors group">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform">settings</span>
+<span class="font-label-sm text-label-sm uppercase">GEAR</span>
+</button>
+</div>
+</div>
+<!-- Atmospheric Missions Preview Panel -->
+<div class="mt-stack-lg w-full max-w-sm bg-ui-panel border-l-4 border-obsy-orange p-4 space-y-2">
+<h3 class="font-label-sm text-label-sm text-obsy-orange uppercase font-bold tracking-wider">Active Mission</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Jump 500m on Planet Lata without hitting a Gravitt-Spike.</p>
+<div class="w-full bg-space-deep h-3 border border-space-mid">
+<div class="bg-obsy-orange h-full w-[65%]" style="box-shadow: 0 0 8px rgba(255, 107, 0, 0.4);"></div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Contextual) -->
+<nav class="fixed bottom-0 w-full z-50 bg-ui-panel text-kiro-white border-t-4 border-lata-purple shadow-[0px_-4px_0px_0px_rgba(0,0,0,1)] flex justify-around items-center pb-safe pt-stack-sm">
+<!-- Active Tab: PLAY (Home screen maps to play) -->
+<a class="flex flex-col items-center justify-center bg-kiro-white text-space-deep rounded-none border-b-4 border-space-mid p-2 scale-95 transition-all duration-75" href="#">
+<span class="material-symbols-outlined" data-weight="fill">play_arrow</span>
+<span class="font-label-sm text-label-sm uppercase">PLAY</span>
+</a>
+<a class="flex flex-col items-center justify-center text-lata-purple p-2 hover:text-kiro-white" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-sm text-label-sm uppercase">SHOP</span>
+</a>
+<a class="flex flex-col items-center justify-center text-lata-purple p-2 hover:text-kiro-white" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label-sm text-label-sm uppercase">RANK</span>
+</a>
+<a class="flex flex-col items-center justify-center text-lata-purple p-2 hover:text-kiro-white" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm uppercase">GEAR</span>
+</a>
+</nav>
+<!-- Floating Action Button: Suppressed on Menu as per mandate, but logic ready if needed for sub-screens -->
+<script>
+        function startGame() {
+            console.log("Game loading...");
+            // Micro-interaction logic
+            document.body.style.transition = 'filter 0.5s';
+            document.body.style.filter = 'brightness(2) contrast(1.2) invert(1)';
+            setTimeout(() => {
+                document.body.style.filter = 'none';
+            }, 100);
+        }
+
+        // Vanilla JS for hover effects sound simulation (visual only)
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                // Potential for slight color shift or animation trigger
+            });
+        });
+    </script>
+</body></html>

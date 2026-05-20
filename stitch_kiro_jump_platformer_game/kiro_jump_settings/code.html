@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kiro Jump Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=JetBrains+Mono:wght@500&amp;family=Inter:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Pixel-art slider thumb simulation */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #FFFFFF;
+            border: 4px solid #000000;
+            cursor: pointer;
+            box-shadow: 2px 2px 0px 0px #000000;
+        }
+
+        /* CRT Scanline Effect Overlay */
+        .crt-overlay::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 100;
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+        }
+
+        /* Pulsing Glow for Danger Zone */
+        @keyframes pulse-red {
+            0% { box-shadow: 4px 4px 0px 0px rgba(0,0,0,1), 0 0 0px rgba(255, 0, 61, 0); }
+            50% { box-shadow: 4px 4px 0px 0px rgba(0,0,0,1), 0 0 15px rgba(255, 0, 61, 0.6); }
+            100% { box-shadow: 4px 4px 0px 0px rgba(0,0,0,1), 0 0 0px rgba(255, 0, 61, 0); }
+        }
+        .glow-red {
+            animation: pulse-red 2s infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#e5e2e1",
+                        "surface-dim": "#141313",
+                        "on-error-container": "#ffdad6",
+                        "outline": "#8e9192",
+                        "on-secondary-fixed-variant": "#74009f",
+                        "on-primary-fixed-variant": "#454747",
+                        "space-deep": "#120024",
+                        "secondary-fixed-dim": "#ecb2ff",
+                        "secondary-container": "#cf5cff",
+                        "outline-variant": "#444748",
+                        "surface-container-highest": "#353434",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "obsy-orange": "#FF6B00",
+                        "space-mid": "#2D0052",
+                        "secondary-fixed": "#f8d8ff",
+                        "on-secondary-container": "#480063",
+                        "primary-fixed": "#e2e2e2",
+                        "error": "#ffb4ab",
+                        "surface-container-high": "#2a2a2a",
+                        "gravitt-red": "#FF003D",
+                        "surface": "#141313",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-bright": "#3a3939",
+                        "on-secondary": "#520071",
+                        "inverse-surface": "#e5e2e1",
+                        "inverse-on-surface": "#313030",
+                        "on-tertiary": "#2f3131",
+                        "tertiary-container": "#e2e2e2",
+                        "surface-variant": "#353434",
+                        "secondary": "#ecb2ff",
+                        "on-surface-variant": "#c4c7c8",
+                        "tertiary-fixed": "#e2e2e2",
+                        "inverse-primary": "#5d5f5f",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "error-container": "#93000a",
+                        "surface-tint": "#c6c6c7",
+                        "tertiary": "#ffffff",
+                        "surface-container": "#201f1f",
+                        "on-secondary-fixed": "#320047",
+                        "on-primary-container": "#636565",
+                        "on-background": "#e5e2e1",
+                        "ui-panel": "rgba(18, 0, 36, 0.85)",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "lata-purple": "#7000FF",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary": "#ffffff",
+                        "surface-container-lowest": "#0e0e0e",
+                        "primary-container": "#e2e2e2",
+                        "background": "#141313",
+                        "on-tertiary-container": "#636565",
+                        "on-primary": "#2f3131",
+                        "on-primary-fixed": "#1a1c1c",
+                        "on-error": "#690005",
+                        "kiro-white": "#FFFFFF"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "pixel-unit": "4px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "20px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Space Mono"],
+                        "headline-lg-mobile": ["Space Mono"],
+                        "headline-lg": ["Space Mono"],
+                        "label-sm": ["JetBrains Mono"],
+                        "button-text": ["Space Mono"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-xl": ["48px", {"lineHeight": "48px", "letterSpacing": "-2px", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "24px", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "32px", "letterSpacing": "-1px", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "button-text": ["18px", {"lineHeight": "18px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md crt-overlay">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-50 bg-surface border-b-4 border-lata-purple shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] h-16 flex items-center px-margin-mobile">
+<button aria-label="Go Back" class="flex items-center justify-center p-2 mr-4 hover:bg-space-mid transition-transform active:translate-y-0.5">
+<span class="material-symbols-outlined text-kiro-white">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white uppercase tracking-tighter">SETTINGS</h1>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow px-margin-mobile py-stack-lg space-y-stack-lg pb-32">
+<!-- AUDIO SECTION -->
+<section class="space-y-stack-md">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-lata-purple">volume_up</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white uppercase">AUDIO</h2>
+</div>
+<div class="bg-ui-panel border-2 border-lata-purple p-stack-md space-y-stack-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+<!-- Music Slider -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="font-label-sm text-label-sm text-on-surface-variant tracking-widest">MUSIC</label>
+<span class="font-label-sm text-label-sm text-kiro-white">80%</span>
+</div>
+<input class="w-full h-4 bg-space-deep border-2 border-lata-purple appearance-none" max="100" min="0" type="range" value="80"/>
+</div>
+<!-- SFX Slider -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="font-label-sm text-label-sm text-on-surface-variant tracking-widest">SFX</label>
+<span class="font-label-sm text-label-sm text-kiro-white">100%</span>
+</div>
+<input class="w-full h-4 bg-space-deep border-2 border-lata-purple appearance-none" max="100" min="0" type="range" value="100"/>
+</div>
+</div>
+</section>
+<!-- PREFERENCES SECTION -->
+<section class="space-y-stack-md">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-lata-purple">tune</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white uppercase">PREFERENCES</h2>
+</div>
+<div class="space-y-stack-sm">
+<!-- Vibration Toggle -->
+<div class="flex justify-between items-center bg-ui-panel border-2 border-lata-purple p-stack-md shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+<span class="font-button-text text-button-text text-kiro-white uppercase">VIBRATION</span>
+<button class="group w-14 h-8 bg-space-deep border-2 border-lata-purple relative transition-colors data-[active=true]:bg-lata-purple" data-active="true" onclick="this.dataset.active = this.dataset.active === 'true' ? 'false' : 'true'">
+<div class="absolute top-0.5 left-0.5 w-6 h-5 bg-kiro-white border-2 border-black transition-transform group-data-[active=true]:translate-x-6"></div>
+</button>
+</div>
+<!-- Notifications Toggle -->
+<div class="flex justify-between items-center bg-ui-panel border-2 border-lata-purple p-stack-md shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+<span class="font-button-text text-button-text text-kiro-white uppercase">NOTIFICATIONS</span>
+<button class="group w-14 h-8 bg-space-deep border-2 border-lata-purple relative transition-colors data-[active=true]:bg-lata-purple" data-active="false" onclick="this.dataset.active = this.dataset.active === 'true' ? 'false' : 'true'">
+<div class="absolute top-0.5 left-0.5 w-6 h-5 bg-kiro-white border-2 border-black transition-transform group-data-[active=true]:translate-x-6"></div>
+</button>
+</div>
+</div>
+</section>
+<!-- LANGUAGE SELECTOR -->
+<section class="space-y-stack-md">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-lata-purple">language</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white uppercase">LANGUAGE</h2>
+</div>
+<div class="grid grid-cols-2 gap-stack-sm">
+<!-- Arabic Selected -->
+<button class="bg-lata-purple border-2 border-kiro-white p-stack-md text-left shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-[2px] transition-all">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-kiro-white opacity-70">SELECTED</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white">ARABIC</span>
+</div>
+</button>
+<!-- English -->
+<button class="bg-ui-panel border-2 border-lata-purple p-stack-md text-left shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-[2px] transition-all hover:bg-space-mid">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">AVAILABLE</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface-variant">ENGLISH</span>
+</div>
+</button>
+</div>
+</section>
+<!-- DANGER ZONE -->
+<section class="pt-stack-lg space-y-stack-md">
+<div class="flex items-center space-x-2 border-b-2 border-gravitt-red pb-2">
+<span class="material-symbols-outlined text-gravitt-red">warning</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-gravitt-red uppercase">DANGER ZONE</h2>
+</div>
+<button class="w-full bg-gravitt-red text-kiro-white font-headline-lg-mobile text-headline-lg-mobile py-stack-md uppercase border-b-4 border-r-4 border-black active:translate-y-[4px] active:translate-x-[4px] active:shadow-none transition-all glow-red">
+                RESET PROGRESS
+            </button>
+<p class="font-label-sm text-label-sm text-on-surface-variant text-center px-4">
+                This will permanently delete your character stats, high scores, and currency.
+            </p>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-2 bg-ui-panel border-t-4 border-lata-purple shadow-[0px_-4px_0px_0px_rgba(0,0,0,1)] z-50">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-kiro-white active:translate-y-[2px]" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm mt-1">HOME</span>
+</a>
+<!-- Games -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-kiro-white active:translate-y-[2px]" href="#">
+<span class="material-symbols-outlined">sports_esports</span>
+<span class="font-label-sm text-label-sm mt-1">PLAY</span>
+</a>
+<!-- Settings (Active) -->
+<a class="flex flex-col items-center justify-center bg-lata-purple text-kiro-white p-2 scale-110 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-[2px]" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm mt-1 uppercase">SETTINGS</span>
+</a>
+<!-- Leaderboard -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:text-kiro-white active:translate-y-[2px]" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-label-sm text-label-sm mt-1">STATS</span>
+</a>
+</nav>
+<!-- Atmospheric Visual Elements (Floating Pixels) -->
+<div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden opacity-20">
+<div class="absolute top-1/4 left-1/4 w-4 h-4 bg-lata-purple animate-pulse"></div>
+<div class="absolute top-1/2 right-10 w-2 h-2 bg-kiro-white"></div>
+<div class="absolute bottom-1/4 left-10 w-6 h-2 bg-space-mid"></div>
+<div class="absolute top-10 right-1/4 w-1 h-8 bg-lata-purple"></div>
+</div>
+<script>
+        // Simple Interaction logic for slider values
+        document.querySelectorAll('input[type="range"]').forEach(input => {
+            input.addEventListener('input', (e) => {
+                const span = e.target.previousElementSibling.querySelector('span');
+                if (span) span.textContent = e.target.value + '%';
+            });
+        });
+    </script>
+</body></html>

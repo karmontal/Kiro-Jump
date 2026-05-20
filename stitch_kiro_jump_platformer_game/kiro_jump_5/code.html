@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>GAME OVER - KIRO JUMP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=JetBrains+Mono:wght@500;700&amp;family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        
+        .pixel-border-heavy {
+            box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+        }
+        
+        .button-push:active {
+            transform: translateY(4px);
+            box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
+        }
+
+        .crt-overlay {
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .floating-kiro {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .glow-red {
+            text-shadow: 0 0 10px rgba(255, 0, 61, 0.8), 0 0 20px rgba(255, 0, 61, 0.4);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#454747",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#74009f",
+                        "tertiary": "#ffffff",
+                        "surface-container-high": "#2a2a2a",
+                        "background": "#141313",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-surface-variant": "#c4c7c8",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "lata-purple": "#7000FF",
+                        "secondary-fixed-dim": "#ecb2ff",
+                        "gravitt-red": "#FF003D",
+                        "on-background": "#e5e2e1",
+                        "tertiary-fixed": "#e2e2e2",
+                        "primary": "#ffffff",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "inverse-primary": "#5d5f5f",
+                        "surface-dim": "#141313",
+                        "on-secondary-fixed": "#320047",
+                        "inverse-on-surface": "#313030",
+                        "on-tertiary": "#2f3131",
+                        "on-tertiary-container": "#636565",
+                        "obsy-orange": "#FF6B00",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary-container": "#636565",
+                        "space-deep": "#120024",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-error": "#690005",
+                        "surface": "#141313",
+                        "primary-fixed": "#e2e2e2",
+                        "outline-variant": "#444748",
+                        "on-primary-fixed": "#1a1c1c",
+                        "surface-container": "#201f1f",
+                        "surface-bright": "#3a3939",
+                        "outline": "#8e9192",
+                        "on-secondary": "#520071",
+                        "ui-panel": "rgba(18, 0, 36, 0.85)",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#e2e2e2",
+                        "kiro-white": "#FFFFFF",
+                        "space-mid": "#2D0052",
+                        "secondary-fixed": "#f8d8ff",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "surface-container-highest": "#353434",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "on-primary": "#2f3131",
+                        "surface-variant": "#353434",
+                        "primary-container": "#e2e2e2",
+                        "secondary": "#ecb2ff",
+                        "secondary-container": "#cf5cff",
+                        "surface-tint": "#c6c6c7",
+                        "on-secondary-container": "#480063"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "gutter": "16px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "40px",
+                        "pixel-unit": "4px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Space Mono"],
+                        "button-text": ["Space Mono"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg": ["Space Mono"],
+                        "headline-lg-mobile": ["Space Mono"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["48px", {"lineHeight": "48px", "letterSpacing": "-2px", "fontWeight": "700"}],
+                        "button-text": ["18px", {"lineHeight": "18px", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "32px", "letterSpacing": "-1px", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "24px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-hidden h-screen w-screen selection:bg-lata-purple selection:text-white">
+<!-- Background Space Scene -->
+<div class="fixed inset-0 z-0 bg-space-deep" data-alt="A sprawling pixel-art cosmic background featuring a distant, glowing violet planet called Lata. The vast darkness of space is filled with clusters of aliased, shimmering stars and nebulae in hues of deep purple and electric blue. The atmosphere is quiet, vast, and evokes a sense of retro arcade adventure.">
+<div class="absolute inset-0 opacity-40" style="background-image: radial-gradient(circle at 70% 30%, #7000FF 0%, transparent 40%);"></div>
+<!-- Planet Lata -->
+<div class="absolute top-[10%] right-[-10%] w-64 h-64 rounded-full bg-lata-purple shadow-[0_0_80px_20px_rgba(112,0,255,0.3)] border-b-8 border-space-mid"></div>
+</div>
+<!-- CRT Overlay -->
+<div class="fixed inset-0 z-50 crt-overlay pointer-events-none"></div>
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 right-0 z-40 bg-surface flex justify-between items-center w-full px-margin-mobile py-stack-sm border-b-4 border-lata-purple shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white uppercase tracking-tighter">
+            KIRO JUMP
+        </div>
+<div class="flex items-center gap-2 bg-space-deep px-3 py-1 border-2 border-lata-purple">
+<span class="material-symbols-outlined text-kiro-white text-[16px]">stars</span>
+<span class="font-label-sm text-label-sm text-kiro-white">9999</span>
+</div>
+</header>
+<!-- Main Content -->
+<main class="relative z-10 flex flex-col items-center justify-center px-margin-mobile pt-20 pb-10 min-h-full">
+<!-- Game Over Title -->
+<h1 class="font-headline-xl text-headline-xl text-gravitt-red uppercase text-center mb-stack-lg glow-red tracking-widest scale-110 md:scale-150">
+            GAME OVER
+        </h1>
+<!-- Floating Kiro -->
+<div class="relative w-48 h-48 md:w-64 md:h-64 flex items-center justify-center mb-stack-lg">
+<img alt="Defeated Kiro" class="w-full h-full object-contain floating-kiro grayscale brightness-75 contrast-125" data-alt="The cute white alien Kiro from Kiro Jump, floating aimlessly in the vacuum of space. Kiro looks slightly dazed or defeated with big, expressive pixelated eyes. The lighting is harsh, as if coming from a nearby star, casting a strong highlight on one side of Kiro's round pixelated body against the dark purple cosmic background." src="https://lh3.googleusercontent.com/aida/ADBb0ugIlH_MQdXC8wI3D1SXqpS-boEQa2Y83B_lvC2-IJJO50K1MwAqVBLyRA2fbIfGO8RWimjRz6K0MiRt3ywugylxB4vTIesv60_N5C0T0i1NQfZIWfRu0Vb9uzKj8iIGRfaGKJMpQAm2oGiVaeHZNHtd_5gq16FkV4L4lFnMxTrFzANECIbEae6yrq4RMPrwrPS-qJirh8pfJdQsvyulamjpbkOoVy4QT8sfumtGFbz-VVgV0JRFLvkBplg"/>
+<!-- Space Bubbles/Debris -->
+<div class="absolute top-0 left-0 w-2 h-2 bg-kiro-white opacity-50 animate-ping"></div>
+<div class="absolute bottom-10 right-0 w-3 h-3 bg-lata-purple opacity-30 animate-pulse"></div>
+</div>
+<!-- Stats Panel -->
+<div class="w-full max-w-md bg-ui-panel border-4 border-lata-purple p-stack-md pixel-border-heavy mb-stack-lg">
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center border-b-2 border-space-mid pb-2">
+<span class="font-label-sm text-label-sm text-lata-purple uppercase">DISTANCE</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white">850<span class="text-xs ml-1">M</span></span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-lata-purple uppercase">SCORE</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white">12400</span>
+</div>
+<!-- High Score Badge -->
+<div class="mt-2 flex justify-center">
+<span class="bg-obsy-orange text-space-deep font-label-sm text-label-sm px-4 py-1 uppercase font-bold border-2 border-black animate-bounce">
+                        NEW HIGH SCORE!
+                    </span>
+</div>
+</div>
+</div><div class="w-full max-w-md bg-ui-panel border-4 border-lata-purple p-stack-md pixel-border-heavy mb-stack-lg">
+<div class="flex justify-between items-center border-b-2 border-lata-purple pb-2 mb-4">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white uppercase">LEADERBOARD</h2>
+<span class="material-symbols-outlined text-lata-purple">leaderboard</span>
+</div>
+<div class="max-h-40 overflow-y-auto pr-2 custom-scrollbar flex flex-col gap-2 font-label-sm text-label-sm">
+<!-- Top Player -->
+<div class="flex justify-between items-center py-2 px-3 bg-space-mid border-l-4 border-obsy-orange">
+<div class="flex items-center gap-3">
+<span class="text-obsy-orange font-bold">01</span>
+<span class="text-kiro-white uppercase">SPACE_JUMPER</span>
+</div>
+<span class="text-kiro-white font-bold">45200</span>
+</div>
+<!-- Current Player Highlighted -->
+<div class="flex justify-between items-center py-2 px-3 bg-lata-purple/20 border-l-4 border-lata-purple">
+<div class="flex items-center gap-3">
+<span class="text-lata-purple font-bold">02</span>
+<span class="text-kiro-white uppercase">KIRO_01 (YOU)</span>
+</div>
+<span class="text-kiro-white font-bold">12400</span>
+</div>
+<!-- Other Players -->
+<div class="flex justify-between items-center py-2 px-3 bg-surface-container-low/50 border-l-4 border-transparent">
+<div class="flex items-center gap-3">
+<span class="text-on-surface-variant">03</span>
+<span class="text-on-surface-variant uppercase">PIXEL_KING</span>
+</div>
+<span class="text-on-surface-variant">9800</span>
+</div>
+<div class="flex justify-between items-center py-2 px-3 bg-surface-container-low/50 border-l-4 border-transparent">
+<div class="flex items-center gap-3">
+<span class="text-on-surface-variant">04</span>
+<span class="text-on-surface-variant uppercase">NOVA_STAR</span>
+</div>
+<span class="text-on-surface-variant">8500</span>
+</div>
+<div class="flex justify-between items-center py-2 px-3 bg-surface-container-low/50 border-l-4 border-transparent">
+<div class="flex items-center gap-3">
+<span class="text-on-surface-variant">05</span>
+<span class="text-on-surface-variant uppercase">VOID_WALKER</span>
+</div>
+<span class="text-on-surface-variant">7200</span>
+</div>
+</div>
+</div>
+<style>
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: #120024;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #7000FF;
+    }
+</style>
+<!-- Action Buttons -->
+<div class="w-full max-w-md flex flex-col gap-stack-md">
+<button class="button-push w-full bg-kiro-white text-space-deep p-4 border-b-8 border-r-4 border-space-mid flex items-center justify-center gap-3 transition-transform duration-75 active:translate-y-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+<span class="font-button-text text-button-text uppercase">RETRY</span>
+</button>
+<button class="button-push w-full bg-space-mid text-kiro-white p-4 border-b-8 border-r-4 border-black flex items-center justify-center gap-3 transition-transform duration-75 active:translate-y-1">
+<span class="material-symbols-outlined">home</span>
+<span class="font-button-text text-button-text uppercase">MAIN MENU</span>
+</button>
+</div>
+</main>
+<!-- Navigation Drawer (Hidden by default, triggered by menu) -->
+<div class="fixed inset-y-0 left-0 z-[60] w-80 bg-space-deep border-r-4 border-lata-purple transform -translate-x-full transition-transform duration-300 shadow-[8px_0px_0px_0px_rgba(0,0,0,0.5)]" id="drawer">
+<div class="flex flex-col h-full p-margin-mobile">
+<div class="flex items-center gap-4 mb-stack-lg border-b-2 border-lata-purple pb-stack-md">
+<div class="w-16 h-16 bg-surface border-2 border-kiro-white overflow-hidden">
+<img alt="Kiro Character Pixel Art" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ugIlH_MQdXC8wI3D1SXqpS-boEQa2Y83B_lvC2-IJJO50K1MwAqVBLyRA2fbIfGO8RWimjRz6K0MiRt3ywugylxB4vTIesv60_N5C0T0i1NQfZIWfRu0Vb9uzKj8iIGRfaGKJMpQAm2oGiVaeHZNHtd_5gq16FkV4L4lFnMxTrFzANECIbEae6yrq4RMPrwrPS-qJirh8pfJdQsvyulamjpbkOoVy4QT8sfumtGFbz-VVgV0JRFLvkBplg"/>
+</div>
+<div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white">KIRO_01</h2>
+<p class="font-label-sm text-label-sm text-lata-purple">LVL 42 JUMPER</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-4 p-4 font-label-sm text-label-sm uppercase text-on-surface-variant hover:bg-space-mid transition-colors" href="#">
+<span class="material-symbols-outlined">assignment</span> MISSIONS
+                </a>
+<a class="flex items-center gap-4 p-4 font-label-sm text-label-sm uppercase text-on-surface-variant hover:bg-space-mid transition-colors" href="#">
+<span class="material-symbols-outlined">emoji_events</span> ACHIEVEMENTS
+                </a>
+<a class="flex items-center gap-4 p-4 font-label-sm text-label-sm uppercase text-on-surface-variant hover:bg-space-mid transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span> SETTINGS
+                </a>
+</nav>
+<div class="mt-auto pt-stack-md border-t-2 border-lata-purple">
+<p class="font-label-sm text-label-sm text-lata-purple opacity-50">PLANET LATA SECTOR 7</p>
+</div>
+</div>
+</div>
+<!-- Overlay for drawer -->
+<div class="fixed inset-0 z-[55] bg-black/60 hidden" id="drawer-overlay"></div>
+<script>
+        // Drawer Logic
+        const menuBtn = document.querySelector('[data-icon="menu"]')?.parentElement || document.querySelector('.material-symbols-outlined:first-of-type')?.parentElement;
+        const drawer = document.getElementById('drawer');
+        const overlay = document.getElementById('drawer-overlay');
+
+        if (menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                drawer.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            });
+        }
+
+        overlay.addEventListener('click', () => {
+            drawer.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+        });
+
+        // Add subtle star twinkle
+        const starsContainer = document.createElement('div');
+        starsContainer.className = 'fixed inset-0 pointer-events-none z-0';
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'absolute bg-kiro-white rounded-full';
+            const size = Math.random() * 3 + 1;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.opacity = Math.random();
+            star.style.animation = `pulse ${2 + Math.random() * 3}s infinite alternate`;
+            starsContainer.appendChild(star);
+        }
+        document.body.prepend(starsContainer);
+    </script>
+</body></html>

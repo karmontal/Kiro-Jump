@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kiro Jump - Level Select</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=JetBrains+Mono:wght@500;700&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pixel-border {
+            box-shadow: 0 4px 0 0 #000000;
+        }
+        .pixel-border:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 0 #000000;
+        }
+        .glow-border {
+            box-shadow: 0 0 10px rgba(112, 0, 255, 0.4);
+        }
+        .star-filled {
+            font-variation-settings: 'FILL' 1;
+            color: #FFD700;
+        }
+        .star-empty {
+            color: #444748;
+        }
+        /* Custom scrollbar for pixel feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #120024;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #7000FF;
+            border: 2px solid #120024;
+        }
+        .star-field {
+            background-image: 
+                radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, #7000FF, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 160px 120px, #7000FF, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: stars-move 100s linear infinite;
+        }
+        @keyframes stars-move {
+            from { background-position: 0 0; }
+            to { background-position: 0 1000px; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "ui-panel": "rgba(18, 0, 36, 0.85)",
+                      "on-primary-fixed": "#1a1c1c",
+                      "error-container": "#93000a",
+                      "on-background": "#e5e2e1",
+                      "on-surface": "#e5e2e1",
+                      "surface": "#141313",
+                      "primary-fixed": "#e2e2e2",
+                      "obsy-orange": "#FF6B00",
+                      "surface-container": "#201f1f",
+                      "space-deep": "#120024",
+                      "secondary-container": "#cf5cff",
+                      "inverse-on-surface": "#313030",
+                      "gravitt-red": "#FF003D",
+                      "surface-dim": "#141313",
+                      "kiro-white": "#FFFFFF",
+                      "lata-purple": "#7000FF",
+                      "on-primary-fixed-variant": "#454747",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "on-secondary": "#520071",
+                      "surface-container-high": "#2a2a2a",
+                      "space-mid": "#2D0052",
+                      "inverse-surface": "#e5e2e1",
+                      "surface-container-low": "#1c1b1b",
+                      "surface-container-highest": "#353434",
+                      "surface-bright": "#3a3939",
+                      "secondary-fixed-dim": "#ecb2ff",
+                      "on-tertiary": "#2f3131",
+                      "background": "#141313",
+                      "tertiary-container": "#e2e2e2",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "on-secondary-container": "#480063",
+                      "outline": "#8e9192",
+                      "on-primary-container": "#636565",
+                      "on-error": "#690005",
+                      "secondary": "#ecb2ff",
+                      "primary-container": "#e2e2e2",
+                      "on-tertiary-container": "#636565",
+                      "tertiary": "#ffffff",
+                      "tertiary-fixed": "#e2e2e2",
+                      "surface-container-lowest": "#0e0e0e",
+                      "outline-variant": "#444748",
+                      "surface-variant": "#353434",
+                      "primary-fixed-dim": "#c6c6c7",
+                      "error": "#ffb4ab",
+                      "on-secondary-fixed-variant": "#74009f",
+                      "inverse-primary": "#5d5f5f",
+                      "on-secondary-fixed": "#320047",
+                      "on-error-container": "#ffdad6",
+                      "on-primary": "#2f3131",
+                      "surface-tint": "#c6c6c7",
+                      "primary": "#ffffff",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "on-surface-variant": "#c4c7c8",
+                      "secondary-fixed": "#f8d8ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-md": "16px",
+                      "pixel-unit": "4px",
+                      "gutter": "16px",
+                      "margin-desktop": "40px",
+                      "stack-lg": "32px",
+                      "stack-sm": "8px",
+                      "margin-mobile": "20px"
+              },
+              "fontFamily": {
+                      "headline-xl": ["Space Mono"],
+                      "headline-lg-mobile": ["Space Mono"],
+                      "headline-lg": ["Space Mono"],
+                      "button-text": ["Space Mono"],
+                      "label-sm": ["JetBrains Mono"],
+                      "body-md": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-xl": ["48px", {"lineHeight": "48px", "letterSpacing": "-2px", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "24px", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "32px", "letterSpacing": "-1px", "fontWeight": "700"}],
+                      "button-text": ["18px", {"lineHeight": "18px", "fontWeight": "700"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md text-body-md overflow-hidden selection:bg-lata-purple selection:text-kiro-white">
+<!-- Global Background Wrapper -->
+<div class="fixed inset-0 z-0 bg-gradient-to-b from-space-deep via-background to-space-mid">
+<div class="star-field absolute inset-0 opacity-40"></div>
+</div>
+<!-- Layout Container -->
+<div class="relative z-10 flex flex-col h-screen max-w-md mx-auto overflow-hidden">
+<!-- TopAppBar (Mapped from JSON) -->
+<header class="flex justify-between items-center w-full px-margin-mobile py-stack-sm h-16 bg-background dark:bg-background border-b border-lata-purple fixed top-0 left-0 right-0 z-50">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center p-2 hover:bg-space-mid rounded-lg transition-colors">
+<span class="material-symbols-outlined text-kiro-white" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-kiro-white tracking-tighter">LEVEL SELECT</h1>
+</div>
+<div class="flex items-center gap-2">
+<div class="bg-ui-panel px-3 py-1 border border-lata-purple flex items-center gap-2">
+<span class="material-symbols-outlined text-obsy-orange text-[18px]" data-icon="monetization_on" style="font-variation-settings: 'FILL' 1;">monetization_on</span>
+<span class="font-label-sm text-label-sm text-kiro-white">2,450</span>
+</div>
+</div>
+</header>
+<!-- Vertical Scroll List of Levels -->
+<main class="flex-1 overflow-y-auto px-margin-mobile pt-24 pb-32 space-y-gutter">
+<!-- LEVEL 1: THE ROCKY SURFACE -->
+<div class="relative group">
+<div class="bg-ui-panel border-2 border-lata-purple p-stack-md relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-24 bg-[#3d2b1f] opacity-40 -z-10"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Stage 01</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white mt-1">THE ROCKY SURFACE</h2>
+</div>
+<div class="bg-green-500/20 border border-green-500 px-2 py-0.5">
+<span class="font-label-sm text-label-sm text-green-400 font-bold">COMPLETED</span>
+</div>
+</div>
+<div class="flex items-center gap-6 mb-6">
+<div class="flex gap-1">
+<span class="material-symbols-outlined star-filled text-[24px]" data-icon="star">star</span>
+<span class="material-symbols-outlined star-filled text-[24px]" data-icon="star">star</span>
+<span class="material-symbols-outlined star-filled text-[24px]" data-icon="star">star</span>
+</div>
+<div class="border-l border-white/10 pl-4">
+<p class="font-label-sm text-label-sm text-on-surface-variant">HIGH SCORE</p>
+<p class="font-button-text text-button-text text-kiro-white">5,000</p>
+</div>
+</div>
+<div class="flex gap-pixel-unit">
+<button class="flex-1 bg-kiro-white text-space-deep font-button-text text-button-text py-3 pixel-border flex items-center justify-center gap-2 uppercase">
+                            REPLAY
+                        </button>
+</div>
+</div>
+<div class="absolute -top-3 -right-3 w-16 h-16 opacity-10 group-hover:opacity-20 pointer-events-none transition-opacity">
+<span class="material-symbols-outlined text-[64px]" data-icon="landscape">landscape</span>
+</div>
+</div>
+<!-- LEVEL 2: THE STORMY SKY -->
+<div class="relative group">
+<div class="bg-ui-panel border-2 border-lata-purple p-stack-md relative overflow-hidden glow-border">
+<div class="absolute top-0 left-0 w-full h-24 bg-[#1a237e] opacity-40 -z-10"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Stage 02</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white mt-1">THE STORMY SKY</h2>
+</div>
+<div class="bg-obsy-orange/20 border border-obsy-orange px-2 py-0.5">
+<span class="font-label-sm text-label-sm text-obsy-orange font-bold">UNLOCKED</span>
+</div>
+</div>
+<div class="flex items-center gap-6 mb-6">
+<div class="flex gap-1">
+<span class="material-symbols-outlined star-empty text-[24px]" data-icon="star">star</span>
+<span class="material-symbols-outlined star-empty text-[24px]" data-icon="star">star</span>
+<span class="material-symbols-outlined star-empty text-[24px]" data-icon="star">star</span>
+</div>
+<div class="border-l border-white/10 pl-4">
+<p class="font-label-sm text-label-sm text-on-surface-variant">HIGH SCORE</p>
+<p class="font-button-text text-button-text text-kiro-white">0</p>
+</div>
+</div>
+<div class="flex gap-pixel-unit">
+<button class="flex-1 bg-lata-purple text-kiro-white font-button-text text-button-text py-3 pixel-border flex items-center justify-center gap-2 uppercase">
+                            START GAME
+                        </button>
+</div>
+</div>
+<div class="absolute -top-3 -right-3 w-16 h-16 text-lata-purple opacity-20 pointer-events-none transition-opacity group-hover:scale-110 duration-500">
+<span class="material-symbols-outlined text-[64px]" data-icon="bolt">bolt</span>
+</div>
+</div>
+<!-- LEVEL 3: THE VOID (LOCKED) -->
+<div class="bg-surface-container-low/50 border-2 border-outline-variant p-stack-md relative grayscale opacity-60">
+<div class="flex flex-col items-center justify-center py-stack-lg gap-stack-md">
+<span class="material-symbols-outlined text-[48px] text-lata-purple" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+<div class="text-center">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-widest">Stage 03</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mt-1">THE VOID</h2>
+</div>
+<div class="mt-2 bg-space-deep px-4 py-2 border border-outline-variant">
+<span class="font-label-sm text-label-sm text-outline">REACH LEVEL 2 TO UNLOCK</span>
+</div>
+</div>
+</div>
+<!-- LEVEL 4: DEEP SPACE (LOCKED) -->
+<div class="bg-surface-container-low/50 border-2 border-outline-variant p-stack-md relative grayscale opacity-40">
+<div class="flex flex-col items-center justify-center py-stack-lg gap-stack-md">
+<span class="material-symbols-outlined text-[48px] text-outline" data-icon="lock_clock">lock_clock</span>
+<div class="text-center">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-widest">Stage 04</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mt-1">DEEP SPACE</h2>
+</div>
+</div>
+</div>
+<!-- Spacer for bottom padding -->
+<div class="h-8"></div>
+</main>
+<!-- BottomNavBar (Mapped from JSON) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile py-2 bg-ui-panel dark:bg-ui-panel border-t border-lata-purple">
+<!-- Home (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-space-mid transition-all duration-75" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<!-- Level Select (Active - Contextual Logic) -->
+<a class="flex flex-col items-center justify-center bg-lata-purple text-kiro-white border-b-4 border-space-deep p-2 translate-y-[2px] transition-transform duration-75" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="font-label-sm text-label-sm">Levels</span>
+</a>
+<!-- Shop (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-space-mid transition-all duration-75" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="shopping_cart">shopping_cart</span>
+<span class="font-label-sm text-label-sm">Shop</span>
+</a>
+</nav>
+</div>
+<!-- Subtle Scanline Effect -->
+<div class="fixed inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] z-[100] bg-[length:100%_2px,3px_100%]"></div>
+<script>
+        // Simple micro-interactions
+        document.querySelectorAll('.pixel-border').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.style.transform = 'translateY(2px)';
+                btn.style.boxShadow = '0 2px 0 0 #000000';
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = 'translateY(0)';
+                btn.style.boxShadow = '0 4px 0 0 #000000';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translateY(0)';
+                btn.style.boxShadow = '0 4px 0 0 #000000';
+            });
+        });
+
+        // Atmosphere: Random lightning flicker for Stage 2
+        const stormCard = document.querySelector('.glow-border');
+        setInterval(() => {
+            if (Math.random() > 0.95) {
+                stormCard.style.borderColor = '#ffffff';
+                stormCard.style.boxShadow = '0 0 20px rgba(255, 255, 255, 0.8)';
+                setTimeout(() => {
+                    stormCard.style.borderColor = '#7000FF';
+                    stormCard.style.boxShadow = '0 0 10px rgba(112, 0, 255, 0.4)';
+                }, 100);
+            }
+        }, 1000);
+    </script>
+</body></html>

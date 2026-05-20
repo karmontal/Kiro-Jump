@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kiro Jump - Shop</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=JetBrains+Mono:wght@500&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-surface-variant": "#c4c7c8",
+                "lata-purple": "#7000FF",
+                "inverse-surface": "#e5e2e1",
+                "surface-bright": "#3a3939",
+                "secondary": "#ecb2ff",
+                "kiro-white": "#FFFFFF",
+                "surface-variant": "#353434",
+                "surface-tint": "#c6c6c7",
+                "surface-container-lowest": "#0e0e0e",
+                "surface-container-low": "#1c1b1b",
+                "error-container": "#93000a",
+                "inverse-primary": "#5d5f5f",
+                "on-surface": "#e5e2e1",
+                "tertiary-fixed-dim": "#c6c6c7",
+                "on-secondary-fixed-variant": "#74009f",
+                "primary-container": "#e2e2e2",
+                "on-background": "#e5e2e1",
+                "primary": "#ffffff",
+                "outline": "#8e9192",
+                "gravitt-red": "#FF003D",
+                "error": "#ffb4ab",
+                "on-tertiary-fixed": "#1a1c1c",
+                "on-tertiary": "#2f3131",
+                "on-tertiary-container": "#636565",
+                "tertiary-container": "#e2e2e2",
+                "on-primary-fixed-variant": "#454747",
+                "on-tertiary-fixed-variant": "#454747",
+                "space-deep": "#120024",
+                "space-mid": "#2D0052",
+                "tertiary-fixed": "#e2e2e2",
+                "surface": "#141313",
+                "on-primary-container": "#636565",
+                "primary-fixed-dim": "#c6c6c7",
+                "on-secondary": "#520071",
+                "obsy-orange": "#FF6B00",
+                "secondary-container": "#cf5cff",
+                "surface-dim": "#141313",
+                "secondary-fixed-dim": "#ecb2ff",
+                "on-primary": "#2f3131",
+                "on-secondary-container": "#480063",
+                "on-error-container": "#ffdad6",
+                "on-secondary-fixed": "#320047",
+                "on-error": "#690005",
+                "surface-container": "#201f1f",
+                "surface-container-highest": "#353434",
+                "secondary-fixed": "#f8d8ff",
+                "background": "#141313",
+                "ui-panel": "rgba(18, 0, 36, 0.85)",
+                "inverse-on-surface": "#313030",
+                "primary-fixed": "#e2e2e2",
+                "surface-container-high": "#2a2a2a",
+                "outline-variant": "#444748",
+                "on-primary-fixed": "#1a1c1c",
+                "tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "margin-mobile": "20px",
+                "gutter": "16px",
+                "stack-lg": "32px",
+                "stack-sm": "8px",
+                "stack-md": "16px",
+                "pixel-unit": "4px",
+                "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                "body-md": ["Inter"],
+                "headline-xl": ["Space Mono"],
+                "headline-lg-mobile": ["Space Mono"],
+                "button-text": ["Space Mono"],
+                "label-sm": ["JetBrains Mono"],
+                "headline-lg": ["Space Mono"]
+            },
+            "fontSize": {
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-xl": ["48px", {"lineHeight": "48px", "letterSpacing": "-2px", "fontWeight": "700"}],
+                "headline-lg-mobile": ["24px", {"lineHeight": "24px", "fontWeight": "700"}],
+                "button-text": ["18px", {"lineHeight": "18px", "fontWeight": "700"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                "headline-lg": ["32px", {"lineHeight": "32px", "letterSpacing": "-1px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .pixel-border {
+            box-shadow: 0 4px 0 0 #000000;
+        }
+        .pixel-border:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 0 #000000;
+        }
+        .glow-border {
+            box-shadow: 0 0 0 2px #7000FF, 0 0 10px rgba(112, 0, 255, 0.4);
+        }
+        .scanline {
+            background: linear-gradient(
+                to bottom,
+                rgba(18, 16, 16, 0) 50%,
+                rgba(0, 0, 0, 0.25) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-24 overflow-x-hidden">
+<!-- CRT Overlay -->
+<div class="fixed inset-0 scanline z-[100] opacity-10 pointer-events-none"></div>
+<!-- Top App Bar -->
+<header class="bg-ui-panel border-b-2 border-lata-purple w-full top-0 sticky z-50 flex justify-between items-center px-margin-mobile py-stack-sm h-16">
+<div class="flex items-center gap-stack-sm">
+<button class="text-kiro-white hover:bg-lata-purple/20 p-2 active:translate-y-0.5 transition-all">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white tracking-tighter">SHOP</h1>
+</div>
+<div class="flex items-center bg-space-deep border border-lata-purple px-stack-sm py-1 gap-2">
+<span class="material-symbols-outlined text-obsy-orange" data-icon="monetization_on" style="font-variation-settings: 'FILL' 1;">monetization_on</span>
+<span class="font-label-sm text-label-sm text-kiro-white">9999 COINS</span>
+</div>
+</header>
+<main class="px-margin-mobile mt-stack-md space-y-stack-lg">
+<!-- Tabs -->
+<div class="flex w-full bg-space-deep border-2 border-lata-purple p-1 gap-1">
+<button class="flex-1 py-stack-sm font-button-text text-button-text bg-kiro-white text-space-deep transition-all" id="tab-btn-characters" onclick="switchTab('characters')">
+                CHARACTERS
+            </button>
+<button class="flex-1 py-stack-sm font-button-text text-button-text text-kiro-white hover:bg-lata-purple/20 transition-all" id="tab-btn-upgrades" onclick="switchTab('upgrades')">
+                UPGRADES
+            </button>
+</div>
+<!-- Characters Section -->
+<section class="space-y-stack-md" id="section-characters">
+<div class="grid grid-cols-2 gap-stack-md">
+<!-- Kiro (Equipped) -->
+<div class="bg-ui-panel border-2 border-kiro-white glow-border p-stack-sm flex flex-col items-center">
+<div class="relative w-full aspect-square bg-space-mid mb-stack-sm flex items-center justify-center">
+<img alt="Kiro character" class="w-24 h-24 object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0ugIlH_MQdXC8wI3D1SXqpS-boEQa2Y83B_lvC2-IJJO50K1MwAqVBLyRA2fbIfGO8RWimjRz6K0MiRt3ywugylxB4vTIesv60_N5C0T0i1NQfZIWfRu0Vb9uzKj8iIGRfaGKJMpQAm2oGiVaeHZNHtd_5gq16FkV4L4lFnMxTrFzANECIbEae6yrq4RMPrwrPS-qJirh8pfJdQsvyulamjpbkOoVy4QT8sfumtGFbz-VVgV0JRFLvkBplg"/>
+<div class="absolute top-0 left-0 bg-kiro-white text-space-deep px-1 font-label-sm text-label-sm">EQUIPPED</div>
+</div>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white mb-2">KIRO</span>
+<button class="w-full bg-surface-container-highest text-on-surface-variant font-button-text text-label-sm py-2 opacity-50 cursor-not-allowed">SELECTED</button>
+</div>
+<!-- Neo-Kiro -->
+<div class="bg-ui-panel border-2 border-lata-purple p-stack-sm flex flex-col items-center">
+<div class="w-full aspect-square bg-space-deep mb-stack-sm flex items-center justify-center relative">
+<img class="w-20 h-20 object-contain" data-alt="A futuristic neon blue pixel art character inspired by a round white ghost. The character features glowing cyan electric pulses across its body and large pixelated eyes that emit a soft blue light. The background is a dark deep space with faint purple grid lines. The style is classic 8-bit arcade with sharp edges." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDC7fPHhlIRw_vi4BGme91i2yyaUB0NXXRv9YsDBL1PWk4Xl7tf2-jgMNb62EzA3j7-UfWT17XXEsQbb-91BjBuzOmRKRKznDsyzmXf7PIaGh0KGe3Uv0JKrqHC6HMtVi4TajK5Mmjv7szBvaKYTDtteB3BH1CaVRiWo0KfBz8ZRxHBQVzmg_7O5IqclfZe__A2TSFUmzK3Irpa8AMGTO6mUWLGR0rX7Q5_qNpPGis74l48e9_kc9NOp8GRvOc5UVq84jc1onR1CM4"/>
+</div>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white mb-2">NEO-KIRO</span>
+<button class="w-full bg-kiro-white text-space-deep font-button-text text-label-sm py-2 pixel-border">5,000 C</button>
+</div>
+<!-- Grav-Bot -->
+<div class="bg-ui-panel border-2 border-lata-purple p-stack-sm flex flex-col items-center col-span-2">
+<div class="flex items-center gap-stack-md w-full">
+<div class="w-32 h-32 bg-space-deep flex items-center justify-center">
+<img class="w-24 h-24 object-contain" data-alt="A robotic alien character in pixel art style. The character has a metallic gray body with bright red glowing sensors and mechanical limbs. It floats slightly above a dark surface. The lighting is harsh and electronic, creating a high-contrast brutalist look common in retro gaming. The environment is dark with subtle space debris." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3jfoufCmJEELdUnjWvqq2ud89a3DSdVXWgOhNKAGx3yM_6FAItNaTxkc2VgCvbNR4P34Iceo7lLIKrZjclRLeseMjZGtYsXMYUdDAvWEO_OePTk50_QLn0CDhM8PJgv9ZlbyQ7Cj81rkaFMPzULPj0pnY4Jw0XG_1xJlSQhAagJVYckOV02ckxFVuTZOkTEP4ohaPPMGU01YBq_nnZgi8ZWrB7mu8ac9OuKV9Zbhr3B0JEPYZlQmNOtAAc55Dg7EqKQJlcyZ306E"/>
+</div>
+<div class="flex-1">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white block mb-1">GRAV-BOT</span>
+<p class="text-on-surface-variant font-label-sm mb-stack-sm">A mechanical gravity-defying visitor from beyond.</p>
+<button class="w-full bg-kiro-white text-space-deep font-button-text text-label-sm py-3 pixel-border">10,000 COINS</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Upgrades Section -->
+<section class="hidden space-y-stack-md" id="section-upgrades">
+<!-- Shield -->
+<div class="bg-ui-panel border-2 border-lata-purple p-stack-md flex gap-stack-md items-center">
+<img alt="Shield upgrade" class="w-16 h-16 border border-lata-purple bg-space-deep p-1" src="https://lh3.googleusercontent.com/aida/ADBb0uh6YnlvEy82J6szDAnNsls-w66c8mk6VvnZsHh4CbQiIMISxtlK1TsUjHktA626upLr1vIG46HGN7o_E0bhazaBR1r3LjiS2dvW7OLgfKtDr9DmvL4dWzU5tp4vq8VCsFeVDfU-VkLvukxTgLIhihn9GdNh-B01od_pdNtdhqG5LohSkmCAO7BZqyR7xefneMqQaHhVLNO7S8dZYStGCIymJNhSEY7PejGX0ppkrXnXt5QaWUxZ9P7HF4w"/>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white">SHIELD</h3>
+<span class="bg-lata-purple text-kiro-white px-2 font-label-sm text-label-sm">LV.1</span>
+</div>
+<p class="text-on-surface-variant font-body-md text-sm mb-2">Protects against one hit.</p>
+<button class="bg-kiro-white text-space-deep font-button-text text-label-sm px-4 py-2 pixel-border">1,000 COINS</button>
+</div>
+</div>
+<!-- Magnet -->
+<div class="bg-ui-panel border-2 border-lata-purple p-stack-md flex gap-stack-md items-center">
+<img alt="Magnet upgrade" class="w-16 h-16 border border-lata-purple bg-space-deep p-1" src="https://lh3.googleusercontent.com/aida/ADBb0uhRRBl7OEAMMNcYciVd8VHLLVOu9hdGP0fu1Hn35dbC2UN8k2rZ_ZmyS8Y-9nlp5mWTM36Fk3dHBeu3h449aZdW2hQwUG6FMcE5C9JtTPvrc6kM7G_5mk7gSdnNEQTrdJQHUlnkdkIJyaAUPXVNPr7Yr75MGR48imkH-QtPfhdBIGadrLxbYcq8ZU_An4CwiOTYFa5E05wVFLhlHolXKUlYWNM8wwmFx36khOfWZuJfxD-TXwxAnBZ6tOE"/>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white">MAGNET</h3>
+<span class="bg-lata-purple text-kiro-white px-2 font-label-sm text-label-sm">LV.1</span>
+</div>
+<p class="text-on-surface-variant font-body-md text-sm mb-2">Attracts distant coins.</p>
+<button class="bg-kiro-white text-space-deep font-button-text text-label-sm px-4 py-2 pixel-border">1,500 COINS</button>
+</div>
+</div>
+<!-- Mega Jump -->
+<div class="bg-ui-panel border-2 border-lata-purple p-stack-md flex gap-stack-md items-center">
+<div class="w-16 h-16 border border-lata-purple bg-space-deep flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-kiro-white" data-icon="keyboard_double_arrow_up">keyboard_double_arrow_up</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-kiro-white">MEGA JUMP</h3>
+<span class="bg-lata-purple text-kiro-white px-2 font-label-sm text-label-sm">LV.2</span>
+</div>
+<p class="text-on-surface-variant font-body-md text-sm mb-2">Increases jump height.</p>
+<button class="bg-kiro-white text-space-deep font-button-text text-label-sm px-4 py-2 pixel-border">2,000 COINS</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-ui-panel border-t-2 border-lata-purple flex justify-around items-center px-4 pb-2 pt-1">
+<a class="flex flex-col items-center justify-center text-kiro-white p-2 hover:text-secondary active:translate-y-0.5 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="videogame_asset">videogame_asset</span>
+<span class="font-label-sm text-label-sm">PLAY</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-kiro-white text-space-deep rounded-none p-2 border-b-4 border-black active:translate-y-0.5 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+<span class="font-label-sm text-label-sm">SHOP</span>
+</a>
+<a class="flex flex-col items-center justify-center text-kiro-white p-2 hover:text-secondary active:translate-y-0.5 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">SKINS</span>
+</a>
+<a class="flex flex-col items-center justify-center text-kiro-white p-2 hover:text-secondary active:translate-y-0.5 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
+<span class="font-label-sm text-label-sm">STATS</span>
+</a>
+</nav>
+<script>
+        function switchTab(tab) {
+            const charSection = document.getElementById('section-characters');
+            const upgradeSection = document.getElementById('section-upgrades');
+            const charBtn = document.getElementById('tab-btn-characters');
+            const upgradeBtn = document.getElementById('tab-btn-upgrades');
+
+            if (tab === 'characters') {
+                charSection.classList.remove('hidden');
+                upgradeSection.classList.add('hidden');
+                
+                charBtn.classList.add('bg-kiro-white', 'text-space-deep');
+                charBtn.classList.remove('text-kiro-white');
+                
+                upgradeBtn.classList.remove('bg-kiro-white', 'text-space-deep');
+                upgradeBtn.classList.add('text-kiro-white');
+            } else {
+                charSection.classList.add('hidden');
+                upgradeSection.classList.remove('hidden');
+                
+                upgradeBtn.classList.add('bg-kiro-white', 'text-space-deep');
+                upgradeBtn.classList.remove('text-kiro-white');
+                
+                charBtn.classList.remove('bg-kiro-white', 'text-space-deep');
+                charBtn.classList.add('text-kiro-white');
+            }
+        }
+
+        // Click effects
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                const audio = new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFRm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YTdvT18='); // Placeholder for blip sound
+                // Just a micro-interaction animation
+                this.style.transform = "scale(0.95)";
+                setTimeout(() => this.style.transform = "scale(1)", 100);
+            });
+        });
+    </script>
+</body></html>
